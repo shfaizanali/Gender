@@ -1,0 +1,4 @@
+Django==1.7
+django-user-accounts==1.0
+djangular==0.2.7
+python-social-auth==0.2.1
