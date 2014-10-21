@@ -1,0 +1,40 @@
+{% extends "base_site.html" %}
+
+
+{% block container %}
+<div class="row profile">
+    <div class="container-fluid">
+        <div class="col-lg-6">
+            <div>
+                <span class="glyphicon glyphicon-align-left glyphicon-bell"></span>
+                <span class="glyphicon glyphicon-align-left glyphicon-bell"></span>
+                <span class="glyphicon glyphicon-align-left glyphicon-bell"></span>
+                <h3>{{user.full_name}}</h3>
+
+            </div>
+            <div>
+                {{ form.as_p }}
+            </div>
+
+        </div>
+        <div class="col-lg-4 pull-right">
+            <div class="thumbnail">
+                {% for subscription in subscriptions %}
+                    <div class="full-bottom-border language">
+                        <span class="glyphicon"><img width="25" height="25" src="/media/{{ subscription.subscribed_language.flag }}" alt="" /></span> <span class="lead">{{ subscription.subscribed_language.language }}</span>
+                        <br><br>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="{{ subscription.progress }}" aria-valuemin="0" aria-valuemax="100" >
+                              {{ subscription.progress }}%
+                          </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% block container %}
+<div>
+    <script type="application/javascript">
+        window.setTimeout(function(){
+            window.location.replace("http://localhost:8000/#/login");
+            //window.location.reload();
+        }, 5000);
+    </script>
+
+        <div class="row">
+            <h2 class="text-center col-lg-4">Registration Successful</h2>
+        </div>
+        <div class="row">
+            <p class="text-center col-lg-6"></p>
+        </div>
+        <div class="row">
+            <p class="text-center col-lg-6">You will be automatically redirected in 5 seconds, <a href="/#/login">click here</a> if it does not redirect</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

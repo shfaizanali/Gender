@@ -1,0 +1,36 @@
+{% extends "base_site.html" %}
+{% load staticfiles %}
+
+
+{% block container %}
+
+
+    <form role="form" name="SigninForm" ng-submit="login()" method="post"  >
+        <input type="hidden" name="csrfmiddlewaretoken" ng-init="loginForm.csrfmiddlewaretoken='{{ csrf_token }}'" ng-model="loginForm.csrfmiddlewaretoken">
+        <div class="alert alert-danger" ng-show="errors.__all__" ng-bind="errors.__all__" role="alert">{{ form.non_field_errors }}</div>
+
+        <div class="form-group">
+            <label for="{{ form.username.id }}">Email</label>
+            <p class="label-danger" ng-bind="errors.username">{{ form.username.errors }}</p>
+            <input type="text" ng-value="" ng-model="loginForm.{{ form.username.name }}" class="form-control"  name="{{ form.username.name }}" id="{{ form.username.id }}" placeholder="Enter Email">
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.password.id }}">{{ form.password.label }}</label>
+            <p class="label-danger" ng-bind="errors.password">{{ form.password.errors }}</p>
+            <input type="password" ng-value=""  ng-model="loginForm.{{ form.password.name }}" class="form-control" name="{{ form.password.name }}" id="{{ form.password.id }}" placeholder="Enter Password">
+        </div>
+
+        <div class="checkbox">
+          <p class="label-danger" ng-bind="errors.remember">{{ form.remember.errors }}</p>
+          <label for="{{ form.remember.id }}">
+            <input type="checkbox" ng-model="loginForm.{{ form.remember.name }}" ng-value="" name="{{ form.remember.name }}" id="{{ form.remember.id }}">
+            Remember this computer
+          </label>
+        </div>
+
+        <input class="btn btn-primary" type="submit" />
+
+    </form>
+
+{% endblock %}

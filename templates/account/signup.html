@@ -1,0 +1,51 @@
+{#{% extends "base.html" %}#}
+{% load staticfiles %}
+
+{% block container %}
+
+<form role="form" enctype="multipart/form-data"  action="{% url 'account_signup' %}" method="post" >
+    {% csrf_token %}
+    {% if  form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <div class="form-group">
+        <label for="{{ form.avatar.id }}">{{ form.avatar.label }}</label>
+        <p class="label-danger">{{ form.avatar.errors }}</p>
+        <input type="file" class="form-control" name="{{ form.avatar.name }}" id="{{ form.avatar.id }}" placeholder="Choose File">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.email.id }}">{{ form.email.label }}</label>
+        <p class="label-danger">{{ form.email.errors }}</p>
+        <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id }}" placeholder="Enter Email">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.username.id }}">{{ form.username.label }}</label>
+        <p class="label-danger">{{ form.username.errors }}</p>
+        <input type="text" class="form-control" name="{{ form.username.name }}" id="{{ form.username.id }}" placeholder="Enter Username">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.full_name.id }}">{{ form.full_name.label }}</label>
+        <p class="label-danger">{{ form.full_name.errors }}</p>
+        <input type="text" class="form-control" name="{{ form.full_name.name }}" id="{{ form.full_name.id }}" placeholder="Enter Full Name">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password.id }}">{{ form.password.label }}</label>
+        <p class="label-danger">{{ form.password.errors }}</p>
+        <input type="password" class="form-control" name="{{ form.password.name }}" id="{{ form.password.id }}" placeholder="Enter Password">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password_confirm.id }}">{{ form.password_confirm.label }}</label>
+        <p class="label-danger">{{ form.password_confirm.errors }}</p>
+        <input type="password" class="form-control" name="{{ form.password_confirm.name }}" id="{{ form.password_confirm.id }}" placeholder="Enter Password again">
+    </div>
+
+    <input class="btn btn-primary" type="submit" />
+
+</form>
+
+{% endblock %}

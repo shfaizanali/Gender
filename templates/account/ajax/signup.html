@@ -1,0 +1,53 @@
+{% extends "base_site.html" %}
+{% load staticfiles %}
+
+{% block container %}
+
+<form role="form"  name="registerForm" enctype="multipart/form-data"   ng-submit="signup($event)" novalidate>
+
+    <input type="hidden" name="csrfmiddlewaretoken" ng-init="rgForm.csrfmiddlewaretoken='{{ csrf_token }}'" ng-model="rgForm.csrfmiddlewaretoken">
+
+
+    <div class="alert alert-danger" ng-show="errors.__all__" ng-bind="errors.__all__" role="alert">{{ form.non_field_errors }}</div>
+
+    <div class="form-group">
+        <label for="{{ form.file.id }}">{{ form.file.label }}</label>
+        <p class="label-danger" ng-bind="errors.file" >{{ form.file.errors }}</p>
+        <input type="file" ng-file-select="onFileSelect($files)" class="form-control" ng-value=""  name="{{ form.file.name }}" id="{{ form.file.id }}" placeholder="Choose File">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.email.id }}">{{ form.email.label }}</label>
+        <p class="label-danger" ng-bind="errors.email" >{{ form.email.errors }}</p>
+        <input type="email" ng-value="" ng-model="rgForm.{{ form.email.name }}" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id }}" placeholder="Enter Email">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.username.id }}">{{ form.username.label }}</label>
+        <p class="label-danger" ng-bind="errors.username" >{{ form.username.errors }}</p>
+        <input type="text" ng-value="" ng-model="rgForm.{{ form.username.name }}" class="form-control" name="{{ form.username.name }}" id="{{ form.username.id }}" placeholder="Enter Username">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.full_name.id }}">{{ form.full_name.label }}</label>
+        <p class="label-danger" ng-bind="errors.full_name" >{{ form.full_name.errors }}</p>
+        <input type="text" ng-value="" ng-model="rgForm.{{ form.full_name.name }}" class="form-control" name="{{ form.full_name.name }}" id="{{ form.full_name.id }}" placeholder="Enter Full Name">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password.id }}">{{ form.password.label }}</label>
+        <p class="label-danger" ng-bind="errors.password">{{ form.password.errors }}</p>
+        <input type="password" ng-value="" ng-model="rgForm.{{ form.password.name }}" class="form-control" name="{{ form.password.name }}" id="{{ form.password.id }}" placeholder="Enter Password">
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password_confirm.id }}">{{ form.password_confirm.label }}</label>
+        <p class="label-danger" ng-bind="errors.password_confirm" >{{ form.password_confirm.errors }}</p>
+        <input type="password" ng-value="" ng-model="rgForm.{{ form.password_confirm.name }}" class="form-control" name="{{ form.password_confirm.name }}" id="{{ form.password_confirm.id }}" placeholder="Enter Password again">
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Submit" />
+
+</form>
+
+{% endblock %}

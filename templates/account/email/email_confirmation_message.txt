@@ -1,0 +1,4 @@
+your email is created
+
+
+{{activate_url}}

@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" />
+    <link href="{% static "main/css/style.css" %}" rel="stylesheet" />
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body ng-app="gender" id="content"  class="{{ controller }}">
+    <div ng-view>
+        {% include "base_site.html" %}
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        FileAPI = {
+            jsUrl: '{% static "main/js/FileAPI.min.js" %}',
+            flashUrl: '{% static "main/js/FileAPI.flash.swf" %}'
+        }
+    </script>
+    <script src="{% static "main/js/angular-file-upload-shim.min.js" %}"></script>
+    <script src="{% static "main/js/angular.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "main/js/angular-file-upload.min.js" %}"></script>
+    <script src="{% static "main/js/angular-route.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "main/js/controllers.js" %}" type="application/javascript"></script>
+    <script src="{% static "main/js/directives.js" %}" type="application/javascript"></script>
+    <script src="{% static "main/js/models.js" %}" type="application/javascript"></script>
+    <script src="{% static "main/js/services.js" %}" type="application/javascript"></script>
+    <script src="{% static "djangular/js/django-angular.min.js" %}" type="application/javascript"></script>
+    <script src="{% static "main/js/app.js" %}" type="application/javascript"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}" type="application/javascript"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

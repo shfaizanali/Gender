@@ -1,0 +1,115 @@
+{% load static %}
+
+<header class="header navbar-fixed-top">
+    {% block header %}
+        <div  class="container-fluid">
+            <div class="row">
+                {% if not user.is_authenticated %}
+                    <div class="pull-left col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-3 ">
+                                <img src="{% static "main/images/Logo.PNG" %}">
+                            </div>
+                            <div class="col-lg-8 " style="padding-top: 8px;" >
+                                <a class="col-lg-offset-1" href="#">Home</a>
+                                <a class="col-lg-offset-1" href="#">Courses</a>
+                                <a class="col-lg-offset-1" href="#">FAQ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4  pull-right">
+                        <a class="btn btn-primary" href="{% url 'social:begin' "facebook" %}">facebook</a>
+                        <a class="btn btn-primary" href="{% url 'social:begin' "google-oauth2" %}">google</a>
+                        <a class="btn btn-primary" href="#/login/" >Login</a>
+                        <a class="col-lg-offset-1 btn btn-success" href="#/signup" >Sign Up</a>
+                    </div>
+                {% else %}
+                    <div class="pull-left col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-3 ">
+                                <img src="{% static "main/images/Logo.PNG" %}">
+                            </div>
+                            <div class="col-lg-8 " style="padding-top: 8px;" >
+                                <a class="col-lg-offset-1" href="#/profile">Home</a>
+                                <a class="col-lg-offset-1" data-toggle="modal" data-target="#myModal">Add New Course</a>
+                                <a class="col-lg-offset-1" href="#">Support</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 pull-right">
+                        <form method="POST" action="{% url "account_logout" %}" class="form-horizontal">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-default btn-lg btn-sutmit-login pull-right">Log Out</button>
+                        </form>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+    {% endblock %}
+</header>
+
+{#Modal add New Course#}
+<div ng-controller="AddCourseController" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Target Language</h4>
+      </div>
+      <div class="modal-body">
+        <p>Pick a course price depends on the course</p>
+           <form role="form"  ng-submit="submitSubscribeForm()" novalidate>
+            <div ng-repeat="sub in form" >
+                <span id="removeIcon{$ $index $}" class="glyphicon glyphicon-remove " ng-click="remove($index)" ></span>
+
+                <select id="select{$ $index $}" class="selected_language" ng-options="language as language.fields.language for language in languages"  ng-model="language" >
+                    <option style="display:none" value="">select a language</option>
+                </select>
+                <span class="col-xs-offset-4" ng-show="language.fields.subscription_cost" >${$ language.fields.subscription_cost $}</span>
+
+            </div>
+            <div ng-click="add()">
+                <span class="glyphicon glyphicon-plus"  ></span><span>Add new Course</span>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+               <br><br>
+            <div>
+                <button type="button" class="btn btn-primary">Paypal</button>
+                <button type="button" class="btn btn-primary">Stripe</button>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+{#End of Add new Course Modal#}
+
+<section   class="contain container-fluid">
+    {% block container %}
+    {% endblock %}
+</section>
+
+<footer class="navbar-fixed-bottom ">
+    {% block footer %}
+        <div class="row">
+            <div class="col-lg-7">
+                <span class="lightgray-color">RememberGender.com</span>
+                <a href="#"><span class="lightgray-color justify-left">About</span></a>
+                <a href="#"><span class="lightgray-color justify-left">Blogs</span></a>
+                <a href="#"><span class="lightgray-color justify-left">News & Events</span></a>
+                <a href="#"><span class="lightgray-color justify-left">Contact</span></a>
+                <p class="lightgray-color small-text">All rights are reserved</p>
+            </div>
+            <div class="col-lg-5 pull-right">
+
+            </div>
+        </div>
+    {% endblock %}
+</footer>
